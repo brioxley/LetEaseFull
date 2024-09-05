@@ -1,0 +1,1 @@
+C:\projects\LetEase\LetEase.Web\letease.web.client\obj\Debug\letease.web.client.esproj.CoreCompileInputs.cache

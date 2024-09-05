@@ -1,0 +1,33 @@
+<h1>{{ title }}</h1>
+
+<div *ngIf="properties.length > 0; else noProperties">
+  <h2>Available Properties</h2>
+  <ul>
+    <li *ngFor="let property of properties">
+      {{ property.name }} - £{{ property.price }}
+      <p>{{ property.description }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noProperties>
+  <p>No properties available at the moment.</p>
+</ng-template>
+
+
+<!--<header class="app-header">
+  <img src="assets/images/Centered_Letease_logo.jpg" alt="LetEase Logo" class="logo">
+  <nav class="bordered-text">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/properties">Properties</a>
+    <a routerLink="/contracts">Contracts</a>
+  </nav>
+</header>
+
+<main class="app-main">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="app-footer">
+  <p>&copy; 2024 LetEase. All rights reserved.</p>
+</footer>-->

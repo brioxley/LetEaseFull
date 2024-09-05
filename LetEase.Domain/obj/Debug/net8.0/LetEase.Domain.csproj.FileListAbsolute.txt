@@ -1,0 +1,12 @@
+C:\projects\LetEase\LetEase.Domain\bin\Debug\net8.0\LetEase.Domain.deps.json
+C:\projects\LetEase\LetEase.Domain\bin\Debug\net8.0\LetEase.Domain.dll
+C:\projects\LetEase\LetEase.Domain\bin\Debug\net8.0\LetEase.Domain.pdb
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.csproj.AssemblyReference.cache
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.AssemblyInfoInputs.cache
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.AssemblyInfo.cs
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.csproj.CoreCompileInputs.cache
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.dll
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\refint\LetEase.Domain.dll
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.pdb
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\ref\LetEase.Domain.dll
