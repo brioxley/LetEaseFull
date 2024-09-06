@@ -19,6 +19,7 @@ C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\LetEase.Web.
 C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\LetEase.Web.Server.csproj.CoreCompileInputs.cache
 C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\LetEase.Web.Server.MvcApplicationPartsAssemblyInfo.cs
 C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\LetEase.Web.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\LetEase.Web.Server.sourcelink.json
 C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\staticwebassets.build.json
 C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\staticwebassets.development.json
 C:\projects\LetEase\LetEase.Web\LetEase.Web.Server\obj\Debug\net8.0\staticwebassets\msbuild.LetEase.Web.Server.Microsoft.AspNetCore.StaticWebAssets.props

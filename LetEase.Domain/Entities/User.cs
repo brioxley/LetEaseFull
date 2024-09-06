@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace LetEase.Domain.Entities
+﻿namespace LetEase.Domain.Entities
 {
 	public class User
 	{
@@ -13,25 +10,30 @@ namespace LetEase.Domain.Entities
 		public string LastName { get; set; }
 		public DateTime DateRegistered { get; set; }
 		public bool EmailConfirmed { get; set; }
-		public UserRole Role { get; set; }
-		public int? CompanyId { get; set; }  // Nullable, as not all users will be associated with a company
+
+		public UserType Type { get; set; }  // Now handles all user distinctions
+		public UserRole Role { get; set; }  // Role within the company (if applicable)
+
+		// Only relevant for CompanyUser
+		public int? CompanyId { get; set; }
 		public Company Company { get; set; }
+
+		// Only relevant for CompanyUser/Manager/Staff
 		public List<UserProperty> ManagedProperties { get; set; }
-		public UserType Type { get; set; }  // New property to distinguish between company users, admins, and clients
 	}
 
 	public enum UserRole
 	{
-		Admin,
 		Manager,
 		Staff,
-		Client  // Added client role
+		Client  // Role within the company or as a client
 	}
 
 	public enum UserType
 	{
-		CompanyUser,
 		Admin,
+		CompanyUser,
 		Client
 	}
 }
+

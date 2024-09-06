@@ -11,6 +11,7 @@ C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase.Infrastructu
 C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase.Infrastructure.AssemblyInfoInputs.cache
 C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase.Infrastructure.AssemblyInfo.cs
 C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase.Infrastructure.csproj.CoreCompileInputs.cache
+C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase.Infrastructure.sourcelink.json
 C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase..2BD682E0.Up2Date
 C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\LetEase.Infrastructure.dll
 C:\projects\LetEase\LetEase.Infrastructure\obj\Debug\net8.0\refint\LetEase.Infrastructure.dll

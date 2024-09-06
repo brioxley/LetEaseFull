@@ -6,6 +6,7 @@ C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.GeneratedMSBu
 C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.AssemblyInfoInputs.cache
 C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.AssemblyInfo.cs
 C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.csproj.CoreCompileInputs.cache
+C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.sourcelink.json
 C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.dll
 C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\refint\LetEase.Domain.dll
 C:\projects\LetEase\LetEase.Domain\obj\Debug\net8.0\LetEase.Domain.pdb
