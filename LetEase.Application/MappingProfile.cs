@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using LetEase.Application.DTOs;
+using LetEase.Domain.Entities;
 
-namespace LetEase.Application
+public class MappingProfile : Profile
 {
-	internal class MappingProfile
+	public MappingProfile()
 	{
+		CreateMap<User, UserDto>().ReverseMap();
+		CreateMap<CreateUserDto, User>();
+		CreateMap<UpdateUserDto, User>();
+
+		CreateMap<Company, CompanyDto>().ReverseMap();
+		CreateMap<CreateCompanyDto, Company>();
+		CreateMap<UpdateCompanyDto, Company>();
+
+		CreateMap<Property, PropertyDto>().ReverseMap();
+		CreateMap<CreatePropertyDto, Property>();
+		CreateMap<UpdatePropertyDto, Property>();
 	}
 }

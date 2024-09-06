@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LetEase.Domain.Entities;
 
-namespace LetEase.Application.DTOs
+public class CreateUserDto
 {
-	internal class CreateUserDto
-	{
-	}
+	public string Username { get; set; }
+	public string Email { get; set; }
+	public string Password { get; set; }
+	public string FirstName { get; set; }
+	public string LastName { get; set; }
+	public UserRole Role { get; set; }
+	// Add any other properties needed for user creation
 }

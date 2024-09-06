@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LetEase.Application.DTOs
 {
-	internal class CompanyDto
+	public class CompanyDto
 	{
 	}
 }

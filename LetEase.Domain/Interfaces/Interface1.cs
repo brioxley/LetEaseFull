@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LetEase.Application.DTOs
+namespace LetEase.Domain.Interfaces
 {
-	public class CreatePropertyDto
+	internal interface Interface1
 	{
 	}
 }
