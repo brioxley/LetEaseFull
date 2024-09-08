@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LetEase.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39a9770932bc0ad3c7eb101a6821fddf93940256")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64863e6205752f44a6ac26f3b91bc251b02bc2ed")]
 [assembly: System.Reflection.AssemblyProductAttribute("LetEase.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LetEase.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

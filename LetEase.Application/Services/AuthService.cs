@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace LetEase.Application.Services
 {
@@ -16,11 +17,13 @@ namespace LetEase.Application.Services
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly IConfiguration _configuration;
+		private readonly IMapper _mapper;
 
-		public AuthService(IUserRepository userRepository, IConfiguration configuration)
+		public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
 		{
 			_userRepository = userRepository;
 			_configuration = configuration;
+			_mapper = mapper;
 		}
 
 		public async Task<UserDto> RegisterUserAsync(RegisterUserDto registerUserDto)
@@ -93,6 +96,17 @@ namespace LetEase.Application.Services
 			// Implement token validation logic here
 			// For now, we'll just return true
 			return Task.FromResult(true);
+		}
+
+		public async Task<UserDto> GetUserByIdAsync(int userId)
+		{
+			var user = await _userRepository.GetByIdAsync(userId);
+			if (user == null)
+			{
+				throw new ApplicationException("User not found.");
+			}
+
+			return _mapper.Map<UserDto>(user);
 		}
 
 		private string GenerateJwtToken(User user)
