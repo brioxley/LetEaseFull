@@ -9,7 +9,6 @@
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public DateTime DateRegistered { get; set; }
-		public bool EmailConfirmed { get; set; }
 
 		public UserType Type { get; set; }  // Now handles all user distinctions
 		public UserRole Role { get; set; }  // Role within the company (if applicable)
@@ -20,6 +19,11 @@
 
 		// Only relevant for CompanyUser/Manager/Staff
 		public List<UserProperty> ManagedProperties { get; set; }
+
+		//this is used for verification
+		public bool EmailConfirmed { get; set; }
+		public string EmailConfirmationToken { get; set; }
+		public DateTime? EmailConfirmationTokenExpires { get; set; }
 	}
 
 	public enum UserRole

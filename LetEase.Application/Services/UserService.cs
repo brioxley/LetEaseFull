@@ -19,8 +19,9 @@ namespace LetEase.Application.Services
 		private readonly IUserRepository _userRepository;
 		private readonly IMapper _mapper;
 		private readonly IConfiguration _configuration;
+		private readonly IEmailService _emailService;
 
-		public UserService(IUserRepository userRepository, IMapper mapper, IConfiguration configuration)
+		public UserService(IUserRepository userRepository, IMapper mapper, IConfiguration configuration, IEmailService emailService)
 		{
 			_userRepository = userRepository;
 			_mapper = mapper;
@@ -102,5 +103,60 @@ namespace LetEase.Application.Services
 
 			return new JwtSecurityTokenHandler().WriteToken(token);
 		}
+		public async Task<UserDto> RegisterUserAsync(RegisterUserDto registerUserDto)
+		{
+			// Check if user exists
+			var existingUser = await _userRepository.GetByEmailAsync(registerUserDto.Email);
+			if (existingUser != null)
+			{
+				throw new ApplicationException("User with this email already exists.");
+			}
+
+			// Create new user
+			var user = new User
+			{
+				Email = registerUserDto.Email,
+				PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDto.Password),
+				EmailConfirmed = false,
+				EmailConfirmationToken = GenerateEmailConfirmationToken(),
+				EmailConfirmationTokenExpires = DateTime.UtcNow.AddHours(24)
+			};
+
+			await _userRepository.CreateAsync(user);
+
+			// Send confirmation email
+			await SendConfirmationEmailAsync(user);
+
+			return new UserDto { /* map user properties */ };
+		}
+
+		public async Task<bool> ConfirmEmailAsync(string email, string token)
+		{
+			var user = await _userRepository.GetByEmailAsync(email);
+			if (user == null || user.EmailConfirmationToken != token || user.EmailConfirmationTokenExpires < DateTime.UtcNow)
+			{
+				return false;
+			}
+
+			user.EmailConfirmed = true;
+			user.EmailConfirmationToken = null;
+			user.EmailConfirmationTokenExpires = null;
+
+			await _userRepository.UpdateAsync(user);
+			return true;
+		}
+
+		private string GenerateEmailConfirmationToken()
+		{
+			return Guid.NewGuid().ToString();
+		}
+
+		private async Task SendConfirmationEmailAsync(User user)
+		{
+			var confirmationLink = $"{_configuration["AppUrl"]}/confirm-email?email={user.Email}&token={user.EmailConfirmationToken}";
+			var emailBody = $"Please confirm your email by clicking this link: {confirmationLink}";
+			await _emailService.SendEmailAsync(user.Email, "Confirm your email", emailBody);
+		}
+
 	}
 }

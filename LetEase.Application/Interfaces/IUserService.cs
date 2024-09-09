@@ -14,5 +14,7 @@ namespace LetEase.Application.Interfaces
 		Task DeleteUserAsync(int id);
 		Task<bool> ValidateUserAsync(string email, string password);
 		Task<string> GenerateJwtTokenAsync(UserDto user);
+		Task<UserDto> RegisterUserAsync(RegisterUserDto registerUserDto);
+		Task<bool> ConfirmEmailAsync(string email, string token);
 	}
 }
