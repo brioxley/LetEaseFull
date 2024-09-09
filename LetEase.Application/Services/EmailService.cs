@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using LetEase.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
-using System.Net.Mail;
-using System.Net;
 
 namespace LetEase.Application.Services
 {
-	public class EmailService : IEmailService
+	public class EmailService :	IEmailService
 	{
 		private readonly IConfiguration _configuration;
 
@@ -18,22 +18,22 @@ namespace LetEase.Application.Services
 		public async Task SendEmailAsync(string to, string subject, string body)
 		{
 			var smtpServer = _configuration["EmailSettings:SmtpServer"];
-			var smtpPort = int.Parse(_configuration["EmailSettings:SmtpPort"]);
-			var smtpUsername = _configuration["EmailSettings:SmtpUsername"];
-			var smtpPassword = _configuration["EmailSettings:SmtpPassword"];
+			var port = int.Parse(_configuration["EmailSettings:SmtpPort"]);
+			var username = _configuration["EmailSettings:SmtpUsername"];
+			var password = _configuration["EmailSettings:SmtpPassword"];
 
-			using var client = new SmtpClient(smtpServer, smtpPort)
+			using var client = new SmtpClient(smtpServer, port)
 			{
-				Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+				Credentials = new NetworkCredential(username, password),
 				EnableSsl = true
 			};
 
 			var mailMessage = new MailMessage
 			{
-				From = new MailAddress(smtpUsername),
+				From = new MailAddress(username),
 				Subject = subject,
 				Body = body,
-				IsBodyHtml = true,
+				IsBodyHtml = true
 			};
 			mailMessage.To.Add(to);
 

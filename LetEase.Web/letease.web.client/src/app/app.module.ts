@@ -10,6 +10,7 @@ import { PropertiesComponent } from './properties/properties.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContractsComponent } from './contracts/contracts.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './login/login.component';
     PropertiesComponent,
     RoomsComponent,
     ContractsComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
