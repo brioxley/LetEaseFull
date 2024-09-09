@@ -1,4 +1,11 @@
-<h1>{{ title }}</h1>
+<nav>
+  <a routerLink="/login">Login</a> |
+  <a routerLink="/register">Register</a> |
+  <a routerLink="/properties">Properties</a>
+</nav>
+<router-outlet></router-outlet>
+
+<!--<h1>{{ title }}</h1>
 
 <div *ngIf="properties.length > 0; else noProperties">
   <h2>Available Properties</h2>
@@ -12,9 +19,7 @@
 
 <ng-template #noProperties>
   <p>No properties available at the moment.</p>
-</ng-template>
-
-
+</ng-template>-->
 <!--<header class="app-header">
   <img src="assets/images/Centered_Letease_logo.jpg" alt="LetEase Logo" class="logo">
   <nav class="bordered-text">
