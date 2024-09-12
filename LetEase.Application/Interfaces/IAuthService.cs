@@ -9,6 +9,7 @@ namespace LetEase.Application.Interfaces
 		Task<LoginResponseDto> LoginAsync(LoginDto loginDto);
 		Task<bool> ValidateTokenAsync(string token);
 		Task<UserDto> GetUserByIdAsync(int userId);
+		Task<(bool Succeeded, string Token)> RefreshTokenAsync(string token);
 	}
 }
 

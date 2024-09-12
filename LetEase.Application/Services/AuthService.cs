@@ -10,6 +10,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+
+
+
 
 namespace LetEase.Application.Services
 {
@@ -18,12 +22,16 @@ namespace LetEase.Application.Services
 		private readonly IUserRepository _userRepository;
 		private readonly IConfiguration _configuration;
 		private readonly IMapper _mapper;
+		private readonly UserManager<User> _userManager;
+		private readonly SignInManager<User> _signInManager;
 
-		public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
+		public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
 		{
 			_userRepository = userRepository;
 			_configuration = configuration;
 			_mapper = mapper;
+			_userManager = userManager;
+			_signInManager = signInManager;
 		}
 
 		public async Task<UserDto> RegisterUserAsync(RegisterUserDto registerUserDto)
@@ -127,11 +135,50 @@ namespace LetEase.Application.Services
 				issuer: _configuration["Jwt:Issuer"],
 				audience: _configuration["Jwt:Audience"],
 				claims: claims,
-				expires: DateTime.Now.AddMinutes(30),
+				expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:DurationInMinutes"])),
 				signingCredentials: credentials
 			);
 
 			return new JwtSecurityTokenHandler().WriteToken(token);
+		}
+
+		public async Task<(bool Succeeded, string Token)> RefreshTokenAsync(string token)
+		{
+			var principal = GetPrincipalFromExpiredToken(token);
+			if (principal == null)
+			{
+				return (false, null);
+			}
+
+			var user = await _userManager.FindByNameAsync(principal.Identity.Name);
+			if (user == null)
+			{
+				return (false, null);
+			}
+
+			var newToken = GenerateJwtToken(user);
+			return (true, newToken);
+		}
+
+		private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+		{
+			var tokenValidationParameters = new TokenValidationParameters
+			{
+				ValidateAudience = false,
+				ValidateIssuer = false,
+				ValidateIssuerSigningKey = true,
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])),
+				ValidateLifetime = false
+			};
+
+			var tokenHandler = new JwtSecurityTokenHandler();
+			SecurityToken securityToken;
+			var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+			var jwtSecurityToken = securityToken as JwtSecurityToken;
+			if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+				throw new SecurityTokenException("Invalid token");
+
+			return principal;
 		}
 	}
 }

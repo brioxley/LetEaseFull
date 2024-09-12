@@ -8,6 +8,7 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\letease.web.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\app\Interceptor\" />
     <Folder Include="src\assets\images\" />
   </ItemGroup>
 </Project>
