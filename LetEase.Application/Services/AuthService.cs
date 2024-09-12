@@ -25,7 +25,12 @@ namespace LetEase.Application.Services
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
 
-		public AuthService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+		public AuthService(
+			IUserRepository userRepository, 
+			IConfiguration configuration, 
+			IMapper mapper,
+			UserManager<User> userManager,
+			SignInManager<User> signInManager)
 		{
 			_userRepository = userRepository;
 			_configuration = configuration;
@@ -45,9 +50,8 @@ namespace LetEase.Application.Services
 			// Create new user
 			var user = new User
 			{
-				Username = registerUserDto.Username,
+				UserName = registerUserDto.Email, // Use Email as UserName
 				Email = registerUserDto.Email,
-				PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDto.Password),
 				FirstName = registerUserDto.FirstName,
 				LastName = registerUserDto.LastName,
 				DateRegistered = DateTime.UtcNow,
@@ -56,8 +60,11 @@ namespace LetEase.Application.Services
 				Role = registerUserDto.Role ?? UserRole.Client, // Default to Client if not specified
 				CompanyId = registerUserDto.CompanyId
 			};
-
-			await _userRepository.AddAsync(user);
+			var result = await _userManager.CreateAsync(user, registerUserDto.Password);
+			 if (!result.Succeeded)
+				 {
+				throw new ApplicationException(string.Join(", ", result.Errors.Select(e => e.Description)));
+				 }
 
 			return new UserDto
 			{

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LetEase.Web.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f55e65caf06b87f5defd182b6e64ea88f24c522")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+edc697bce6a4aa7d63a01f34e4c69d1d9d3abfb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("LetEase.Web.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LetEase.Web.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

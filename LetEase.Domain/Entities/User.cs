@@ -4,10 +4,10 @@ namespace LetEase.Domain.Entities
 {
 	public class User : IdentityUser
 	{
-		public int Id { get; set; }
-		public string Username { get; set; }
-		public string Email { get; set; }
-		public string PasswordHash { get; set; }
+		//public int Id { get; set; }
+		//public string Username { get; set; }
+		//public string Email { get; set; }
+		//public string PasswordHash { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public DateTime DateRegistered { get; set; }
@@ -23,7 +23,7 @@ namespace LetEase.Domain.Entities
 		public List<UserProperty> ManagedProperties { get; set; }
 
 		//this is used for verification
-		public bool EmailConfirmed { get; set; }
+		//public bool EmailConfirmed { get; set; }
 		public string EmailConfirmationToken { get; set; }
 		public DateTime? EmailConfirmationTokenExpires { get; set; }
 	}

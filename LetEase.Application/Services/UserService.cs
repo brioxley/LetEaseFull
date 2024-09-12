@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Identity;
 
 namespace LetEase.Application.Services
 {
@@ -20,17 +21,24 @@ namespace LetEase.Application.Services
 		private readonly IMapper _mapper;
 		private readonly IConfiguration _configuration;
 		private readonly IEmailService _emailService;
+		private readonly UserManager<User> _userManager;
 
-		public UserService(IUserRepository userRepository, IMapper mapper, IConfiguration configuration, IEmailService emailService)
+
+		public UserService(IUserRepository userRepository, 
+			IMapper mapper, 
+			IConfiguration configuration, 
+			IEmailService emailService,
+			UserManager<User> userManager)
 		{
 			_userRepository = userRepository;
 			_mapper = mapper;
 			_configuration = configuration;
+			_userManager = userManager;
 		}
 
-		public async Task<UserDto> GetUserByIdAsync(int id)
+		public async Task<UserDto> GetUserByIdAsync(string id)
 		{
-			var user = await _userRepository.GetByIdAsync(id);
+			var user = await _userManager.FindByIdAsync(id);
 			return _mapper.Map<UserDto>(user);
 		}
 
@@ -49,35 +57,43 @@ namespace LetEase.Application.Services
 		public async Task<UserDto> CreateUserAsync(CreateUserDto createUserDto)
 		{
 			var user = _mapper.Map<User>(createUserDto);
+			var result = await _userManager.CreateAsync(user, createUserDto.Password);
+
+			   if (!result.Succeeded)
+				   {
+				throw new ApplicationException(string.Join(", ", result.Errors.Select(e => e.Description)));
+				   }
 			user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(createUserDto.Password);
 			user.DateRegistered = DateTime.UtcNow;
 
-			var createdUser = await _userRepository.CreateAsync(user);
-			return _mapper.Map<UserDto>(createdUser);
+			return _mapper.Map<UserDto>(user);
 		}
 
 		public async Task UpdateUserAsync(UpdateUserDto updateUserDto)
 		{
-			var user = await _userRepository.GetByIdAsync(updateUserDto.Id);
+			var user = await _userManager.FindByIdAsync(updateUserDto.Id);
 			if (user == null)
 				throw new KeyNotFoundException($"User with ID {updateUserDto.Id} not found.");
 
 			_mapper.Map(updateUserDto, user);
-			await _userRepository.UpdateAsync(user);
+			await _userManager.UpdateAsync(user);
 		}
 
-		public async Task DeleteUserAsync(int id)
+		public async Task DeleteUserAsync(string id)
 		{
-			await _userRepository.DeleteAsync(id);
+			var user = await _userManager.FindByIdAsync(id);
+			if (user != null)
+			{
+				await _userManager.DeleteAsync(user);
+			}
 		}
 
 		public async Task<bool> ValidateUserAsync(string email, string password)
 		{
-			var user = await _userRepository.GetByEmailAsync(email);
+			var user = await _userManager.FindByEmailAsync(email);
 			if (user == null)
 				return false;
-
-			return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+			return await _userManager.CheckPasswordAsync(user, password);
 		}
 
 		public async Task<string> GenerateJwtTokenAsync(UserDto user)

@@ -53,6 +53,10 @@ namespace LetEase.Infrastructure.Data
 				.HasForeignKey(u => u.CompanyId)
 				.OnDelete(DeleteBehavior.Restrict);
 
+			modelBuilder.Entity<User>()
+           .Property(u => u.Id)
+           .HasConversion<string>();
+
 			modelBuilder.Entity<Property>()
 				.HasOne(p => p.Company)
 				.WithMany(c => c.Properties)
