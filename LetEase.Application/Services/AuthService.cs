@@ -42,7 +42,7 @@ namespace LetEase.Application.Services
 		public async Task<UserDto> RegisterUserAsync(RegisterUserDto registerUserDto)
 		{
 			// Check if user already exists
-			if (await _userRepository.GetByEmailAsync(registerUserDto.Email) != null)
+			if (await _userManager.FindByEmailAsync(registerUserDto.Email) != null)
 			{
 				throw new ApplicationException("User with this email already exists.");
 			}
@@ -52,6 +52,7 @@ namespace LetEase.Application.Services
 			{
 				UserName = registerUserDto.Email, // Use Email as UserName
 				Email = registerUserDto.Email,
+				PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerUserDto.Password),
 				FirstName = registerUserDto.FirstName,
 				LastName = registerUserDto.LastName,
 				DateRegistered = DateTime.UtcNow,
@@ -61,15 +62,15 @@ namespace LetEase.Application.Services
 				CompanyId = registerUserDto.CompanyId
 			};
 			var result = await _userManager.CreateAsync(user, registerUserDto.Password);
-			 if (!result.Succeeded)
-				 {
+			   if (!result.Succeeded)
+				   {
 				throw new ApplicationException(string.Join(", ", result.Errors.Select(e => e.Description)));
-				 }
+				  }
 
 			return new UserDto
 			{
 				Id = user.Id,
-				Username = user.Username,
+				UserName = user.UserName,
 				Email = user.Email,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
@@ -95,7 +96,7 @@ namespace LetEase.Application.Services
 				User = new UserDto
 				{
 					Id = user.Id,
-					Username = user.Username,
+					UserName = user.UserName,
 					Email = user.Email,
 					FirstName = user.FirstName,
 					LastName = user.LastName,
