@@ -1,21 +1,31 @@
-<div class="register-container">
-  <h2>Register</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
-    </div>
-    <button type="submit">Register</button>
-  </form>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="email" name="email" required>
   </div>
-</div>
+  <div>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+  </div>
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required>
+  </div>
+  <div>
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+    </div>
+  <button type="submit">Register</button>
+</form>
+
+
+  <!--<div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}-->
+

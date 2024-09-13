@@ -12,17 +12,16 @@ import { ContractsComponent } from './contracts/contracts.component';
 import { AuthGuard } from './guards/auth.guard';
 
 
+
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'properties', component: PropertiesComponent },
-  { path: 'rooms', component: RoomsComponent },
-  { path: 'contracts', component: ContractsComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  // Add other protected routes here
- { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'properties', component: PropertiesComponent, canActivate: [AuthGuard] },
+  { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
+  { path: 'contracts', component: ContractsComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' }  // This will redirect any unknown paths to the home page
 ];
 
 @NgModule({

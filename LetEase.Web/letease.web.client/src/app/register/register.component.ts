@@ -12,6 +12,8 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  firstName: string = '';
+  lastName: string = '';
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -22,7 +24,15 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.register(this.password).subscribe(
+    const registerUserDto = {
+      email: this.email,
+      password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      userName: this.email // Using email as username
+    };
+
+    this.authService.register(registerUserDto).subscribe(
       response => {
         console.log('Registration successful', response);
         // Redirect to login page or show success message
