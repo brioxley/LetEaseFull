@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service'; 
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +22,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.register(this.email, this.password).subscribe(
+    this.authService.register(this.password).subscribe(
       response => {
         console.log('Registration successful', response);
         // Redirect to login page or show success message

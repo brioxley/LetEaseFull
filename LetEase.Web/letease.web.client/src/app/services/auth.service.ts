@@ -13,12 +13,33 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login`, { email, password });
+    return this.http.post(`${this.apiUrl}/auth/login`, { email, password })
+           .pipe(
+ tap(response => this.setSession(response))
+              );
   }
 
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/register`, { email, password });
+register(registerUserDto: any): Observable < any > {
+    return this.http.post(`${this.apiUrl}/auth/register`, registerUserDto);
   }
+
+private setSession(authResult: any) {
+localStorage.setItem('token', authResult.token);
+ localStorage.setItem('user_id', authResult.user.id);
+  }
+
+  logout() {
+ localStorage.removeItem('token');
+ localStorage.removeItem('user_id');
+  }
+
+   isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+ getToken(): string | null {
+    return localStorage.getItem('token');
+ }
 
   refreshToken(): Observable<any> {
     const currentToken = localStorage.getItem('token');
