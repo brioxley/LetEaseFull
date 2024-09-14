@@ -30,16 +30,16 @@ namespace LetEase.Domain.Entities
 
 	public enum UserRole
 	{
-		Manager,
-		Staff,
-		Client  // Role within the company or as a client
+		Manager = 0,
+		Staff = 1,
+		Client = 2
 	}
 
 	public enum UserType
 	{
-		Admin,
-		CompanyUser,
-		Client
+		Admin = 0,
+		CompanyUser = 1,
+		Client = 2
 	}
 }
 

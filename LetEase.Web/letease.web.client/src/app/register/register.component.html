@@ -1,7 +1,8 @@
 <form (ngSubmit)="onSubmit()">
   <div>
     <label for="username">Username:</label>
-    <input type="text" id="username" [(ngModel)]="user.username" name="username" required>
+    <input [(ngModel)]="user.username" name="username" type="text" required>
+    <!--<input type="text" id="username" [(ngModel)]="user.username" name="username" required>-->
   </div>
   <div>
     <label for="email">Email:</label>
@@ -17,7 +18,8 @@
   </div>
   <div>
     <label for="password">Password:</label>
-    <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+    <!--<input [(ngModel)]="user.email" name="email" type="email" required>-->
+    <input type="password" id="password" [(ngModel)]="user.password" name="password" required>  
   </div>
   <div>
     <label for="confirmPassword">Confirm Password:</label>

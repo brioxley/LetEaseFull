@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent {
   user: RegisterUserDto = {
+    username: '',
       email: '',
       password: '',
       firstName: '',
@@ -19,7 +20,7 @@ export class RegisterComponent {
       type: UserType.Client, // Default value
       role: UserRole.Client, // Default value
       companyId: undefined,
-      username: ''
+
   };
   confirmPassword: string = '';
   constructor(private authService: AuthService) { }

@@ -4,55 +4,29 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:39637",
-      "sslPort": 44370
+      "applicationUrl": "http://localhost:5096",
+      "sslPort": 7181
     }
   },
   "profiles": {
-    "LetEase.API": {
+    "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7220;http://localhost:5220",
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7181;http://localhost:5096",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }
     }
   }
 }
-//  "profiles": {
-//    "http": {
-//      "commandName": "Project",
-//      "dotnetRunMessages": true,
-//      "launchBrowser": true,
-//      "launchUrl": "swagger",
-//      "applicationUrl": "http://localhost:5096",
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Development",
-//        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-//      }
-//    },
-//    "https": {
-//      "commandName": "Project",
-//      "dotnetRunMessages": true,
-//      "launchBrowser": true,
-//      "launchUrl": "swagger",
-//      "applicationUrl": "https://localhost:7181;http://localhost:5096",
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Development",
-//        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-//      }
-//    },
-//    "IIS Express": {
-//      "commandName": "IISExpress",
-//      "launchBrowser": true,
-//      "launchUrl": "swagger",
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Development",
-//        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-//      }
-//    }
-//  }
-//}
 
