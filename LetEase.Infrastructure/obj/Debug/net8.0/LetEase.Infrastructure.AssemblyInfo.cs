@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LetEase.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a39206566e3aa810f9109c5a0e4a4adba5a8d99d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+516b84d40c2e1c654379a5aa68cd4b30a11abd39")]
 [assembly: System.Reflection.AssemblyProductAttribute("LetEase.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LetEase.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { tap } from 'rxjs/operators';
+import { RegisterUserDto } from '../models/register-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,13 @@ export class AuthService {
               );
   }
 
-register(registerUserDto: any): Observable < any > {
-    return this.http.post(`${this.apiUrl}/auth/register`, registerUserDto);
+  register(user: RegisterUserDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/register`, user);
   }
+
+//register(registerUserDto: any): Observable < any > {
+//    return this.http.post(`${this.apiUrl}/auth/register`, registerUserDto);
+//  }
 
 private setSession(authResult: any) {
 localStorage.setItem('token', authResult.token);
