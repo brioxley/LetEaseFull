@@ -20,9 +20,8 @@ export class AuthService {
               );
   }
 
-  register(user: any): Observable<any> {
-    const registerUserDto = { registerUserDto: user };
-    return this.http.post(`${this.apiUrl}/auth/register`, registerUserDto);
+  register(user: RegisterUserDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/register`, user);
   }
 
 //register(registerUserDto: any): Observable < any > {

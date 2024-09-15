@@ -12,21 +12,22 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent {
   user: RegisterUserDto = {
-    username: '',
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      type: UserType.Client, // Default value
-      role: UserRole.Client, // Default value
-      companyId: undefined,
+    Username: '',
+      Email: '',
+      Password: '',
+      FirstName: '',
+      LastName: '',
+      Type: UserType.Client, // Default value
+      Role: UserRole.Client, // Default value
+      CompanyId: undefined,
 
   };
-  confirmPassword: string = '';
+  ConfirmPassword: string = '';
   constructor(private authService: AuthService) { }
 
   onSubmit() {
-    if (this.user.password !== this.confirmPassword) {
+    console.log('User object before sending:', this.user);
+    if (this.user.Password !== this.ConfirmPassword) {
       console.error('Passwords do not match');
       return;
     }

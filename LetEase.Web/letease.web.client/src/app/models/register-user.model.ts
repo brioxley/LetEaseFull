@@ -1,14 +1,14 @@
 import { UserType, UserRole } from './user-enums';
 
 export interface RegisterUserDto {
-  email: string;
-  password: string;
-  username: string;
-  firstName?: string;
-  lastName?: string;
-  type?: UserType;
-  role?: UserRole;
-  companyId?: number;
+  Username: string;
+  Email: string;
+  Password: string;
+  FirstName: string;
+  LastName: string;
+  Type: UserType;
+  Role: UserRole;
+  CompanyId?: number;
 }
 
 

@@ -48,6 +48,14 @@ namespace LetEase.Infrastructure.Data
 			});
 
 			modelBuilder.Entity<User>()
+				.HasIndex(u => u.Email)
+				.IsUnique();
+
+			modelBuilder.Entity<User>()
+				.HasIndex(u => u.UserName)
+				.IsUnique();
+
+			modelBuilder.Entity<User>()
 				.HasOne(u => u.Company)
 				.WithMany(c => c.Users)
 				.HasForeignKey(u => u.CompanyId)
