@@ -24,23 +24,27 @@ namespace LetEase.Application.Services
 		private readonly IMapper _mapper;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
+		private readonly IEmailService _emailService;
 
 		public AuthService(
-			IUserRepository userRepository, 
-			IConfiguration configuration, 
+			IUserRepository userRepository,
+			IConfiguration configuration,
 			IMapper mapper,
 			UserManager<User> userManager,
-			SignInManager<User> signInManager)
+			SignInManager<User> signInManager,
+			IEmailService emailService)
 		{
 			_userRepository = userRepository;
 			_configuration = configuration;
 			_mapper = mapper;
 			_userManager = userManager;
 			_signInManager = signInManager;
+			_emailService = emailService;
 		}
 
 		public async Task<UserDto> RegisterUserAsync(RegisterUserDto registerUserDto)
-		{
+	
+			{
 			// Check if user already exists
 			if (await _userManager.FindByEmailAsync(registerUserDto.Email) != null)
 			{
@@ -59,13 +63,12 @@ namespace LetEase.Application.Services
 				EmailConfirmed = false, // You might want to implement email confirmation later
 				Type = registerUserDto.Type,
 				Role = registerUserDto.Role ?? UserRole.Client, // Default to Client if not specified
-				CompanyId = registerUserDto.CompanyId
+				CompanyId = registerUserDto.CompanyId,
+				EmailConfirmationToken = Guid.NewGuid().ToString(),
+				EmailConfirmationTokenExpires = DateTime.UtcNow.AddHours(24)
 			};
-			var result = await _userManager.CreateAsync(user, registerUserDto.Password);
-			   if (!result.Succeeded)
-				   {
-				throw new ApplicationException(string.Join(", ", result.Errors.Select(e => e.Description)));
-				  }
+			await _userManager.CreateAsync(user, registerUserDto.Password);
+			await SendVerificationEmailAsync(user);
 
 			return new UserDto
 			{
@@ -79,7 +82,29 @@ namespace LetEase.Application.Services
 				CompanyId = user.CompanyId
 			};
 		}
+		private async Task SendVerificationEmailAsync(User user)
+		{
+			var verificationLink = $"{_configuration["AppUrl"]}/verify-email?token={user.EmailConfirmationToken}&email={user.Email}";
+			var emailBody = $"Please verify your email by clicking this link: {verificationLink}";
+			await _emailService.SendEmailAsync(user.Email, "Verify your email", emailBody);
+		}
 
+		public async Task<bool> VerifyEmailAsync(string token, string email)
+   {
+ var user = await _userRepository.GetByEmailAsync(email);
+       if (user == null || user.EmailConfirmationToken != token || user.EmailConfirmationTokenExpires<DateTime.UtcNow)
+       {
+           return false;
+
+}
+
+user.EmailConfirmed = true;
+user.EmailConfirmationToken = null;
+user.EmailConfirmationTokenExpires = null;
+await _userRepository.UpdateAsync(user);
+
+       return true;
+   }
 		public async Task<LoginResponseDto> LoginAsync(LoginDto loginDto)
 		{
 			var user = await _userRepository.GetByEmailAsync(loginDto.Email);

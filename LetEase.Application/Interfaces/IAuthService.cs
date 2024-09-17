@@ -10,6 +10,7 @@ namespace LetEase.Application.Interfaces
 		Task<bool> ValidateTokenAsync(string token);
 		Task<UserDto> GetUserByIdAsync(int userId);
 		Task<(bool Succeeded, string Token)> RefreshTokenAsync(string token);
+		Task<bool> VerifyEmailAsync(string token, string email);
 	}
 }
 

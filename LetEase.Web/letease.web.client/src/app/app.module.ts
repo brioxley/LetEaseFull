@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -17,6 +18,7 @@ import { ContractsComponent } from './contracts/contracts.component';
 // Import the AuthInterceptor
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     RouterModule,
     HttpClientModule,

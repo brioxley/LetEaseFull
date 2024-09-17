@@ -23,24 +23,27 @@ export class RegisterComponent {
 
   };
   ConfirmPassword: string = '';
+  passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  errorMessage = '';
+  successMessage = '';
   constructor(private authService: AuthService) { }
 
   onSubmit() {
     console.log('User object before sending:', this.user);
     if (this.user.Password !== this.ConfirmPassword) {
-      console.error('Passwords do not match');
+      this.errorMessage = 'Passwords do not match';
       return;
     }
 
     this.authService.register(this.user).subscribe(
       response => {
-        console.log('Registration successful', response);
-        // Handle successful registration
-      },
-      error => {
-        console.error('Registration failed', error);
-        // Handle registration error
-      }
+        this.successMessage = response.message || 'Registration successful. Please check your email to verify your account.';
+          this.errorMessage = '';
+     },
+ error => {
+              this.errorMessage = error.error.message || 'Registration failed. Please try again.';
+              this.successMessage = '';
+          }
     );
   }
 }

@@ -24,9 +24,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/register`, user);
   }
 
-//register(registerUserDto: any): Observable < any > {
-//    return this.http.post(`${this.apiUrl}/auth/register`, registerUserDto);
-//  }
+  verifyEmail(token: string, email: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/auth/verify-email`, { params: { token, email } });
+  }
 
 private setSession(authResult: any) {
 localStorage.setItem('token', authResult.token);
